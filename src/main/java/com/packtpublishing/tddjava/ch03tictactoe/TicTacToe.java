@@ -6,22 +6,46 @@ public class TicTacToe {
     private Character[][] board={{'\0','\0','\0'},{'\0','\0','\0'},{'\0','\0','\0'}};
     private char lastPlayer = '\0';
 
+    private static int SIZE = 3;
+
     public String play(int x, int y) {
 
         checkAxis(x);
         checkAxis(y);
         lastPlayer = nextPlayer();
         setBox(x,y, lastPlayer);
-        for (int index = 0; index<3;index++){
-            if(board[0][index] == lastPlayer && board[1][index] == lastPlayer && board[2][index] == lastPlayer){
-                return lastPlayer + " is the winner";
-            }
+        if(isWin()){
+            return lastPlayer + " is the winner";
         }
+
         return "No winner";
     }
 
+    private boolean isWin(){
+        int playerTotal = lastPlayer * this.SIZE;
+        int diagonal1 = '\0';
+        int diagonal2 = '\0';
+        for (int index = 0; index<this.SIZE;index++){
+            diagonal1 = diagonal1 + board[index][index];
+            diagonal2 = diagonal2 + board[index][this.SIZE - index -1];
+
+            if(board[0][index] + board[1][index]+ board[2][index] == playerTotal){
+                return true;
+            }
+
+            if(board[index][0] + board[index][1]+ board[index][2] == playerTotal){
+                return true;
+            }
+
+            if(diagonal1 == playerTotal) return true;
+            if(diagonal2 == playerTotal) return false;
+
+        }
+        return false;
+    }
+
     private void checkAxis(int axis){
-        if(axis<1 || axis>3){
+        if(axis<1 || axis>this.SIZE){
             throw
             new RuntimeException("X is outside board");
         }

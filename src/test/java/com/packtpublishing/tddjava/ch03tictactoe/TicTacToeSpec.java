@@ -34,7 +34,7 @@ public class TicTacToeSpec {
     }
     @Test
     public void giveFirstTurnNextPlayerThenX(){
-        ticTacToe.play(1,1);
+        //ticTacToe.play(1,1);
         assertEquals('X',ticTacToe.nextPlayer());
     }
     @Test
@@ -56,5 +56,37 @@ public class TicTacToeSpec {
         ticTacToe.play(2,2);
         String actual = ticTacToe.play(3,1);
         assertEquals("X is the winner", actual);
+    }
+    @Test
+    public void whenPlayAndWholeVerticalLineThenWinner(){
+
+        ticTacToe.play(2,1); // X
+        ticTacToe.play(1,1); // O
+        ticTacToe.play(3,1); // X
+        ticTacToe.play(1,2); // O
+        ticTacToe.play(2,2); // X
+
+        String actual = ticTacToe.play(1,3);
+        assertEquals("O is the winner", actual);
+    }
+    @Test
+    public void whenPlayAndWholeDiagonalLineThenWinner(){
+
+        ticTacToe.play(1,1); // X
+        ticTacToe.play(2,1); // O
+        ticTacToe.play(2,2); // X
+        ticTacToe.play(3,1); // O
+
+        String actual = ticTacToe.play(3,3);
+        assertEquals("X is the winner",actual);
+    }
+
+    @Test
+    public void drawGame(){
+
+        ticTacToe.play(1,1); // X
+        ticTacToe.play(2,2); // O
+
+
     }
 }
