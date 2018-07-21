@@ -4,7 +4,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class TicTacToeSpec {
 
@@ -83,10 +84,15 @@ public class TicTacToeSpec {
 
     @Test
     public void drawGame(){
-
         ticTacToe.play(1,1); // X
+        ticTacToe.play(1, 2); // O
+        ticTacToe.play(1, 3); // X
+        ticTacToe.play(2, 1); // O
+        ticTacToe.play(2, 3); // X
         ticTacToe.play(2,2); // O
-
-
+        ticTacToe.play(3, 1); // X
+        ticTacToe.play(3, 3); // O
+        String actual = ticTacToe.play(3, 2);
+        assertEquals("The result is draw", actual);
     }
 }

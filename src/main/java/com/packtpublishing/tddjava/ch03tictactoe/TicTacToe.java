@@ -16,16 +16,30 @@ public class TicTacToe {
         setBox(x,y, lastPlayer);
         if(isWin()){
             return lastPlayer + " is the winner";
+        } else if (isDraw()) {
+            return "The result is draw";
+        } else {
+            return "No winner";
         }
-
-        return "No winner";
     }
 
+    private boolean isDraw() {
+        for (int x = 0; x < this.SIZE; x++) {
+            for (int y = 0; y < this.SIZE; y++) {
+                if (board[x][y] == '\0') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     private boolean isWin(){
         int playerTotal = lastPlayer * this.SIZE;
         int diagonal1 = '\0';
         int diagonal2 = '\0';
         for (int index = 0; index<this.SIZE;index++){
+
+
             diagonal1 = diagonal1 + board[index][index];
             diagonal2 = diagonal2 + board[index][this.SIZE - index -1];
 
@@ -38,7 +52,7 @@ public class TicTacToe {
             }
 
             if(diagonal1 == playerTotal) return true;
-            if(diagonal2 == playerTotal) return false;
+            if (diagonal2 == playerTotal) return true;
 
         }
         return false;
